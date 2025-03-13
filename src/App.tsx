@@ -96,11 +96,14 @@ function App() {
     selectedProviderDetails: EIP6963ProviderDetail
   ) {
     const { provider, info } = selectedProviderDetails;
+
     try {
       const accounts = (await provider.request({
         method: "eth_requestAccounts",
       })) as string[];
+
       const chainId = await provider.request({ method: "eth_chainId" });
+      
       setConnection({
         providerUUID: info.uuid,
         accounts,
@@ -183,7 +186,7 @@ function App() {
                       key={info.uuid}
                       handleConnect={handleConnectProvider}
                       walletDetails={{ info, provider }}
-                      isConneted={connection?.providerUUID === info.uuid}
+                      isConnected={connection?.providerUUID === info.uuid}
                     />
                   )
                 )}
